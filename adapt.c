@@ -37,8 +37,8 @@ double chebyshev_integral(double a,double b,double (*f)(double)) {
 }
 double adaptive_integral(double a,double b,double (*f)(double),double eps) 
 {
-	double h=b-a/10.0;
-	int s=3;
+	double h=(b-a)/10.0;
+	int s=5;
 	double sp=pow(2.0,s)-1.0;
 	double I1;
 	double I2; double chi,delta;
@@ -62,13 +62,10 @@ double adaptive_integral(double a,double b,double (*f)(double),double eps)
 			a+=h;
 			global_steps++;
 		} 
-		else 
-		{
 			chi=pow(delta/eps,1.0/s);
 			if (chi>10.0) chi=10.0;
 			if (chi<0.1) chi=0.1;
 			h=0.95*h/chi;
-		}
 	}
 	return sum;
 }
